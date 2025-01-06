@@ -1,43 +1,44 @@
 package main
 
 import (
-	"encoding/xml"
+	"encoding/json"
 	"fmt"
 	"os"
 	"strings"
-
-	"github.com/avast/apkparser"
 )
 
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
+func out_(f string) {
+	dat, err := os.ReadFile(f)
+	check(err)
+	fmt.Print(string(dat))
+	fmt.Println("")
+}
+
 func main() {
-	apkName := ""
-	for i := 0; i < 5; i++ {
-		if strings.Contains(os.Args[i], ".apk") {
-			apkName = os.Args[i]
+	if len(os.Args) == 1 {
+		fmt.Println("Fake output")
+		os.Exit(0)
+	}
+
+	args := strings.Join(os.Args, " ")
+
+	paramJson, err := os.ReadFile("params")
+	check(err)
+	paramMap := map[string]string{}
+	if err := json.Unmarshal([]byte(paramJson), &paramMap); err != nil {
+		check(err)
+	}
+
+	for k, v := range paramMap {
+		if strings.Contains(args, k) {
+			out_(v)
 			break
 		}
 	}
-	if apkName == "" {
-		fmt.Println("APK file is not found in parameters")
-	}
-
-	enc := xml.NewEncoder(os.Stdout)
-	enc.Indent("", "\t")
-
-	zipErr, resErr, manErr := apkparser.ParseApk(apkName, enc)
-	if zipErr != nil {
-		fmt.Fprintf(os.Stderr, "Failed to open the APK: %s", zipErr.Error())
-		os.Exit(1)
-		return
-	}
-
-	if resErr != nil {
-		fmt.Fprintf(os.Stderr, "Failed to parse resources: %s", resErr.Error())
-	}
-	if manErr != nil {
-		fmt.Fprintf(os.Stderr, "Failed to parse AndroidManifest.xml: %s", manErr.Error())
-		os.Exit(1)
-		return
-	}
-	fmt.Println()
 }
