@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -26,9 +27,16 @@ func main() {
 		os.Exit(0)
 	}
 
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	exPath := filepath.Dir(ex) + "/"
+	fmt.Println(exPath)
+
 	args := strings.Join(os.Args, " ")
 
-	paramJson, err := os.ReadFile("params")
+	paramJson, err := os.ReadFile(exPath + "params")
 	check(err)
 	paramMap := map[string]string{}
 	if err := json.Unmarshal([]byte(paramJson), &paramMap); err != nil {
@@ -37,7 +45,7 @@ func main() {
 
 	for k, v := range paramMap {
 		if strings.Contains(args, k) {
-			out_(v)
+			out_(exPath + v)
 			break
 		}
 	}
