@@ -1,4 +1,6 @@
-package: name='com.ringapp.debug' versionCode='70481501' versionName='3.80.0_DEBUG' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'
+package main
+
+var badging_out string = `package: name='com.ringapp.debug' versionCode='70481501' versionName='3.80.0_DEBUG' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'
 sdkVersion:'28'
 targetSdkVersion:'34'
 uses-permission: name='android.permission.FOREGROUND_SERVICE'
@@ -89,4 +91,8 @@ supports-screens: 'small' 'normal' 'large' 'xlarge'
 supports-any-density: 'true'
 locales: '--_--' 'de' 'en-GB' 'en-XA' 'es' 'es-MX' 'es-US' 'fr' 'it' 'ja' 'nl'
 densities: '120' '160' '240' '320' '480' '640' '65534' '65535'
-native-code: 'arm64-v8a' 'armeabi-v7a' 'x86'
+native-code: 'arm64-v8a' 'armeabi-v7a' 'x86'`
+
+var dump_out string = `package: name='com.ringapp.debug' versionCode='70481501' versionName='3.80.0_DEBUG' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'
+sdkVersion:'28'
+targetSdkVersion:'34'`
