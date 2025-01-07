@@ -14,16 +14,17 @@ func check(e error) {
 
 func main() {
 	if len(os.Args) == 1 {
-		fmt.Println("Fake output v0.1")
+		fmt.Println("Fake output v0.2")
 		os.Exit(0)
 	}
 
 	args := strings.Join(os.Args, " ")
 
 	paramMap := map[string]string{
-		"dump badging": badging_out,
-		"badging":      badging_out,
-		"dump":         dump_out,
+		"settings_apk-debug.apk":                           settings_apk_debug,
+		"qr-code-gen.apk":                                  qr_code_gen,
+		"appium-uiautomator2-server-v":                     appium_uiautomator2_server_v,
+		"appium-uiautomator2-server-debug-androidTest.apk": appium_uiautomator2_server_debug_androidTest,
 	}
 
 	for k, v := range paramMap {
