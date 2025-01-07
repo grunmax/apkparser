@@ -1,1 +1,1 @@
-# mock output tool
+# aapt2 mock output tool for Appium
