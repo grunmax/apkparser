@@ -14,7 +14,7 @@ func check(e error) {
 
 func main() {
 	if len(os.Args) == 1 {
-		fmt.Println("Fake output v0.2")
+		fmt.Println("Fake output v0.3")
 		os.Exit(0)
 	}
 
